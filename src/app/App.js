@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Select from 'react-select' //ojo
+import Select from 'react-select'
 
 const gradeMappings = {
     1: '5th A',
@@ -196,8 +196,6 @@ handleGradeChange = (selectedOption) => {
     }
   }  
 
-
-
     render(){
         return(
             <div>
@@ -230,59 +228,100 @@ handleGradeChange = (selectedOption) => {
                                     <form onSubmit={this.addStudent}>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="name" onChange={this.handleChange}
-                                            type="text" placeholder="Student Name"
-                                            value={this.state.name} />
+                                            <input 
+                                            name="name" 
+                                            onChange={this.handleChange}
+                                            type="text" 
+                                            placeholder="Student Name"
+                                            value={this.state.name}
+                                            pattern="[A-Za-z]+"
+                                            />
+                                            <small className="note">Only alphabetic characters are allowed</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <textarea name="last_name" onChange={this.handleChange}
-                                                placeholder="Student Last Name" 
-                                                className="materialize-textarea"
-                                                value={this.state.last_name}></textarea>
+                                            <input 
+                                            name="last_name" 
+                                            onChange={this.handleChange}
+                                            type="text" 
+                                            placeholder="Student Last Name"
+                                            value={this.state.last_name}
+                                            pattern="[A-Za-z]+"
+                                            />
+                                            <small className="note">Only alphabetic characters are allowed</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="DNI_student" onChange={this.handleChange}
-                                            type="text" placeholder="Student DNI" 
-                                            value={this.state.DNI_student}/>
+                                            <input 
+                                            name="DNI_student" 
+                                            onChange={this.handleChange}
+                                            type="text" 
+                                            placeholder="Student DNI" 
+                                            value={this.state.DNI_student}
+                                            pattern="[0-9]+"
+                                            />
+                                            <small className="note">Only numbers are allowed</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="file_number" onChange={this.handleChange}
-                                            type="text" placeholder="File Number" 
-                                            value={this.state.file_number}/>
+                                            <input 
+                                            name="file_number" 
+                                            onChange={this.handleChange}
+                                            type="text" 
+                                            placeholder="File Number" 
+                                            value={this.state.file_number}
+                                            pattern="[0-9]+"
+                                            />
+                                            <small className="note">Only numbers are allowed</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="phone_number" onChange={this.handleChange}
-                                            type="text" placeholder="Student Phone Number" 
-                                            value={this.state.phone_number}/>
+                                            <input 
+                                            name="phone_number" 
+                                            onChange={this.handleChange}
+                                            type="text" 
+                                            placeholder="Student Phone Number" 
+                                            value={this.state.phone_number}
+                                            pattern="\+\d{1,3}\d{9,14}"
+                                            required
+                                            />
+                                            <small className="note">Please, only valid format. Eg. +541159686899</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="street" onChange={this.handleChange}
-                                            type="text" placeholder="Street" 
-                                            value={this.state.address.street}/>
+                                            <input 
+                                            name="street" 
+                                            onChange={this.handleChange}
+                                            type="text" 
+                                            placeholder="Street" 
+                                            value={this.state.address.street}
+                                            pattern="[A-Za-z]+"
+                                            />
+                                            <small className="note">Only alphabetic characters are allowed</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
                                             <input name="number" onChange={this.handleChange}
                                             type="text" placeholder="Number" 
-                                            value={this.state.address.number}/>
+                                            value={this.state.address.number}
+                                            pattern="[0-9]+"
+                                            />
+                                            <small className="note">Only numbers are allowed</small>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
                                             <input name="zip_code" onChange={this.handleChange}
                                             type="text" placeholder="Zip Code" 
-                                            value={this.state.address.zip_code}/>
+                                            value={this.state.address.zip_code}
+                                            />
+                                            <small className="note">Please, only valid format. Eg. B1156 or 1156</small>
                                             </div>
                                         </div>
                                         <div className="row">
