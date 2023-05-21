@@ -28,7 +28,8 @@ class App extends Component {
             gradeOptions: [
                 {value: '5th A', label: '5th A'},
                 {value: '5th B', label: '5th B'}
-            ]
+            ],
+            errors: {}
         }
         this.handleChange = this.handleChange.bind(this)
         this.addStudent = this.addStudent.bind(this)
@@ -36,6 +37,52 @@ class App extends Component {
     
 addStudent(e){
     e.preventDefault()
+
+    const {
+        name, last_name, DNI_student, file_number, phone_number, address:{street, number, zip_code}, grade
+        } = this.state
+
+    let errors = {}
+    if(!name) {
+        errors.name="Name is required"
+    }
+
+    if(!last_name){
+        errors.last_name="Last Name is required"
+    }
+
+    if(!DNI_student){
+        errors.DNI_student="DNI Student is required"
+    }
+
+    if(!file_number){
+        errors.file_number="File number is required"
+    }
+
+    if(!phone_number){
+        errors.phone_number="Phone number is required"
+    }
+
+    if(!street){
+        errors.street="Street is required"
+    }
+
+    if(!number){
+        errors.number="Number is required"
+    }
+
+    if(!zip_code){
+        errors.zip_code="Zip Code is required"
+    }
+
+    if(!grade){
+        errors.grade="Grade must be selected"
+    }
+
+    if(Object.keys(errors).length>0){
+        this.setState({errors})
+        return
+    }
 
     if(this.state._id){
         fetch(`/api/students/${this.state._id}`, {
@@ -185,6 +232,13 @@ handleChange(e){
             [name]:value
         })
     }
+
+    this.setState(prevState=>({
+        errors:{
+            ...prevState.errors,
+            [name]:""
+        }
+    }))
 }
 
 handleGradeChange = (selectedOption) => {
@@ -197,6 +251,7 @@ handleGradeChange = (selectedOption) => {
   }  
 
     render(){
+        const {errors} = this.state
         return(
             <div>
                 {/* Navigation */}
@@ -235,8 +290,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student Name"
                                             value={this.state.name}
                                             pattern="[A-Za-z]+"
+                                            required
                                             />
-                                            <small className="note">Only alphabetic characters are allowed</small>
+                                            <small className="note">Only alphabetic characters are allowed. </small>
+                                            <small className="note" style={{color:"red"}}>{errors.name}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -248,8 +305,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student Last Name"
                                             value={this.state.last_name}
                                             pattern="[A-Za-z]+"
+                                            required
                                             />
-                                            <small className="note">Only alphabetic characters are allowed</small>
+                                            <small className="note">Only alphabetic characters are allowed. </small>
+                                            <small className="note" style={{color:"red"}}>{errors.last_name}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -261,8 +320,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student DNI" 
                                             value={this.state.DNI_student}
                                             pattern="[0-9]+"
+                                            required
                                             />
-                                            <small className="note">Only numbers are allowed</small>
+                                            <small className="note">Only numbers are allowed. </small>
+                                            <small className="note" style={{color:"red"}}>{errors.DNI_student}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -274,8 +335,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="File Number" 
                                             value={this.state.file_number}
                                             pattern="[0-9]+"
+                                            required
                                             />
-                                            <small className="note">Only numbers are allowed</small>
+                                            <small className="note">Only numbers are allowed. </small>
+                                            <small className="note" style={{color:"red"}}>{errors.file_number}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -289,7 +352,8 @@ handleGradeChange = (selectedOption) => {
                                             pattern="\+\d{1,3}\d{9,14}"
                                             required
                                             />
-                                            <small className="note">Please, only valid format. Eg. +541159686899</small>
+                                            <small className="note">Please, only valid format. Eg. +541159686899 </small>
+                                            <small className="note" style={{color:"red"}}>{errors.phone_number}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -301,8 +365,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Street" 
                                             value={this.state.address.street}
                                             pattern="[A-Za-z]+"
+                                            required
                                             />
-                                            <small className="note">Only alphabetic characters are allowed</small>
+                                            <small className="note">Only alphabetic characters are allowed. </small>
+                                            <small className="note" style={{color:"red"}}>{errors.street}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -311,8 +377,10 @@ handleGradeChange = (selectedOption) => {
                                             type="text" placeholder="Number" 
                                             value={this.state.address.number}
                                             pattern="[0-9]+"
+                                            required
                                             />
-                                            <small className="note">Only numbers are allowed</small>
+                                            <small className="note">Only numbers are allowed. </small>
+                                            <small className="note" style={{color:"red"}}>{errors.number}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -320,8 +388,10 @@ handleGradeChange = (selectedOption) => {
                                             <input name="zip_code" onChange={this.handleChange}
                                             type="text" placeholder="Zip Code" 
                                             value={this.state.address.zip_code}
+                                            required
                                             />
-                                            <small className="note">Please, only valid format. Eg. B1156 or 1156</small>
+                                            <small className="note">Please, only valid format. Eg. B1156 or 1156 </small>
+                                            <small className="note" style={{color:"red"}}>{errors.zip_code}</small>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -332,7 +402,9 @@ handleGradeChange = (selectedOption) => {
                                                     value={this.state.selectedGrade}
                                                     onChange={this.handleGradeChange}
                                                     placeholder="Select Grade"
+                                                    required
                                                 />
+                                                <small className="note" style={{color:"red"}}>{errors.grade}</small>
                                             </div>
                                         </div>
                                         <button type="submit" className="btn cyan darken-4">
