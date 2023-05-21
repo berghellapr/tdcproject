@@ -1,14 +1,6 @@
 import React, {Component} from 'react'
-import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, Routes, Navigate } from 'react-router-dom'
 
-import Home from '../app/Home'
-import Users from '../app/home/usersregistration'
-import Students from '../app/home/usersregistration/students'
-import Parents from '../app/home/usersregistration/parents'
-import Admins from '../app/home/usersregistration/admins'
-import Attendance from '../app/home/attendance'
-
-/*class App extends Component {
+class App extends Component {
 
     constructor(){
         super()
@@ -187,7 +179,7 @@ handleChange(e){
     render(){
         return(
             <div>
-                {/* Navigation }
+                {/* Navigation */}
                 <nav className="cyan darken-4">
                     <div className="container">
                         <a className="brand-logo" href="/">
@@ -361,22 +353,6 @@ handleChange(e){
             </div>
         )
     }
-}
-*/
-
-
-function App(){
-    return(
-        <BrowserRouter>
-            <Routes>
-            </Routes>
-                <Route path="/" element={<div>Estoy en la ruta raiz</div>}></Route>
-                <Route path="/students" element={<div>Estoy en la ruta students</div>}></Route>
-        
-                <Route path="*" element={<Navigate to="/" /> }/>
-
-        </BrowserRouter>
-    )
 }
 
 export default App
