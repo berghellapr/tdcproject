@@ -278,9 +278,9 @@ handleChange(e){
                             </div>
                         </div>
                         <div className="col s8">
-                            <table className="highlight" style="font-size: 10px; width:10%">
+                            <table className="highlight" style={{ fontSize: '12px', width: '100%' }}>
                                 <thead>
-                                    <tr>
+                                <tr>
                                     <th className="s1">Name</th>
                                     <th className="s1">Last Name</th>
                                     <th className="s1">DNI</th>
@@ -290,34 +290,39 @@ handleChange(e){
                                     <th className="s1">Number</th>
                                     <th className="s1">Zip Code</th>
                                     <th className="s1">Grade</th>
-                                    </tr>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        this.state.students.map(student=>{
-                                            return (
-                                                <tr key={student._id}>
-                                                    <td>{student.name}</td>
-                                                    <td>{student.last_name}</td>
-                                                    <td>{student.DNI_student}</td>
-                                                    <td>{student.file_number}</td>
-                                                    <td>{student.phone_number}</td>
-                                                    <td>{student.address.street}</td>
-                                                    <td>{student.address.number}</td>
-                                                    <td>{student.address.zip_code}</td>
-                                                    <td>{student.grade}</td>
-                                                    <td>
-                                                        <button className="btn cyan darken-4" onClick={()=> this.editStudent(student._id)}>
-                                                            <i className="tiny material-icons">edit</i>
-                                                        </button>
-                                                        <button className="btn cyan darken-4" onClick={()=>this.deleteStudent(student._id)} style={{margin:'1px'}}>
-                                                        <i className="tiny material-icons">delete</i>                                           
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
+                                {this.state.students.map(student => {
+                                    return (
+                                    <tr key={student._id}>
+                                        <td>{student.name}</td>
+                                        <td>{student.last_name}</td>
+                                        <td>{student.DNI_student}</td>
+                                        <td>{student.file_number}</td>
+                                        <td>{student.phone_number}</td>
+                                        <td>{student.address.street}</td>
+                                        <td>{student.address.number}</td>
+                                        <td>{student.address.zip_code}</td>
+                                        <td>{student.grade}</td>
+                                        <td>
+                                        <button
+                                            className="btn cyan darken-4"
+                                            onClick={() => this.editStudent(student._id)}
+                                        >
+                                            <i className="tiny material-icons">edit</i>
+                                        </button>
+                                        <button
+                                            className="btn cyan darken-4"
+                                            onClick={() => this.deleteStudent(student._id)}
+                                            style={{ margin: '1px' }}
+                                        >
+                                            <i className="tiny material-icons">delete</i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    );
+                                })}
                                 </tbody>
                             </table>
                         </div>
