@@ -233,12 +233,23 @@ handleChange(e){
         })
     }
 
-    this.setState(prevState=>({
-        errors:{
-            ...prevState.errors,
-            [name]:""
+    if(name==="zip_code"){
+        if(value.length>5 || !/^(?:\w{1}\d{4}|\d{4})$/.test(value)){
+            this.setState(prevState=>({
+                errors:{
+                    ...prevState.errors,
+                    zip_code: "Please enter a valid Zip Code in the format 'B1665' or '1665' with a maximum of 5 characters."
+                }
+            }))
+        } else {
+            this.setState(prevState=>({
+                errors:{
+                    ...prevState.errors,
+                    zip_code:""
+                }
+            }))
         }
-    }))
+    }
 }
 
 handleGradeChange = (selectedOption) => {
@@ -290,9 +301,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student Name"
                                             value={this.state.name}
                                             pattern="[A-Za-z]+"
+                                            maxLength={15}
                                             required
                                             />
-                                            <small className="note">Only alphabetic characters are allowed. </small>
+                                            <small className="note">Only alphabetic characters are allowed. Max 15 characters. </small>
                                             <small className="note" style={{color:"red"}}>{errors.name}</small>
                                             </div>
                                         </div>
@@ -305,9 +317,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student Last Name"
                                             value={this.state.last_name}
                                             pattern="[A-Za-z]+"
+                                            maxLength={15}
                                             required
                                             />
-                                            <small className="note">Only alphabetic characters are allowed. </small>
+                                            <small className="note">Only alphabetic characters are allowed. Max 15 characters. </small>
                                             <small className="note" style={{color:"red"}}>{errors.last_name}</small>
                                             </div>
                                         </div>
@@ -320,9 +333,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student DNI" 
                                             value={this.state.DNI_student}
                                             pattern="[0-9]+"
+                                            maxLength={8}
                                             required
                                             />
-                                            <small className="note">Only numbers are allowed. </small>
+                                            <small className="note">Only numbers are allowed. Max 8 numbers. </small>
                                             <small className="note" style={{color:"red"}}>{errors.DNI_student}</small>
                                             </div>
                                         </div>
@@ -335,9 +349,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="File Number" 
                                             value={this.state.file_number}
                                             pattern="[0-9]+"
+                                            maxLength={6}
                                             required
                                             />
-                                            <small className="note">Only numbers are allowed. </small>
+                                            <small className="note">Only numbers are allowed. Max 6 numbers. </small>
                                             <small className="note" style={{color:"red"}}>{errors.file_number}</small>
                                             </div>
                                         </div>
@@ -350,6 +365,7 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Student Phone Number" 
                                             value={this.state.phone_number}
                                             pattern="\+\d{1,3}\d{9,14}"
+                                            maxLength={13}
                                             required
                                             />
                                             <small className="note">Please, only valid format. Eg. +541159686899 </small>
@@ -365,9 +381,10 @@ handleGradeChange = (selectedOption) => {
                                             placeholder="Street" 
                                             value={this.state.address.street}
                                             pattern="[A-Za-z]+"
+                                            maxLength={15}
                                             required
                                             />
-                                            <small className="note">Only alphabetic characters are allowed. </small>
+                                            <small className="note">Only alphabetic characters are allowed. Max 15 characters. </small>
                                             <small className="note" style={{color:"red"}}>{errors.street}</small>
                                             </div>
                                         </div>
@@ -377,9 +394,10 @@ handleGradeChange = (selectedOption) => {
                                             type="text" placeholder="Number" 
                                             value={this.state.address.number}
                                             pattern="[0-9]+"
+                                            maxLength={5}
                                             required
                                             />
-                                            <small className="note">Only numbers are allowed. </small>
+                                            <small className="note">Only numbers are allowed. Max 5 numbers. </small>
                                             <small className="note" style={{color:"red"}}>{errors.number}</small>
                                             </div>
                                         </div>
