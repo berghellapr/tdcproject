@@ -13,7 +13,7 @@ const StudentSchema = new Schema({
         number:{type:Number, required:true},
         zip_code:{type:String, required:true}
         },
-    ID_related:{type:Number, required:true}
+        grade:{type:Number, required:true}
 })
 
 module.exports = mongoose.model('Student', StudentSchema)

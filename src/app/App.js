@@ -15,7 +15,7 @@ class App extends Component {
                 number:'',
                 zip_code:'',
             },
-            ID_related:'',
+            grade:'',
             students: [],
             _id: ''
         }
@@ -50,7 +50,7 @@ addStudent(e){
                     number:'',
                     zip_code:'',
                 },
-                ID_related:'',
+                grade:'',
                 students: [],
                 _id: ''
             })
@@ -70,7 +70,7 @@ addStudent(e){
                 number: this.state.address.number,
                 zip_code: this.state.address.zip_code
                 },
-            ID_related: this.state.ID_related
+                grade: this.state.grade
         }
         fetch('/api/students', {
             method: 'POST',
@@ -96,7 +96,7 @@ addStudent(e){
                         number:'',
                         zip_code:'',
                     },
-                    ID_related:''
+                    grade:''
                 })
                 this.fetchStudents()
             })
@@ -134,7 +134,7 @@ editStudent(_id){
                     number: data.address.number,
                     zip_code: data.address.zip_code
                     },
-                ID_related: data.ID_related,
+                    grade: data.grade,
                 _id: data._id
             })
         })
@@ -265,9 +265,9 @@ handleChange(e){
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="ID_related" onChange={this.handleChange}
-                                            type="text" placeholder="ID Related to Parent" 
-                                            value={this.state.ID_related}/>
+                                            <input name="grade" onChange={this.handleChange}
+                                            type="text" placeholder="Grade" 
+                                            value={this.state.grade}/>
                                             </div>
                                         </div>
                                         <button type="submit" className="btn cyan darken-4">
@@ -289,7 +289,7 @@ handleChange(e){
                                     <th className="s1">Street</th>
                                     <th className="s1">Number</th>
                                     <th className="s1">Zip Code</th>
-                                    <th className="s1">ID_related</th>
+                                    <th className="s1">Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -305,7 +305,7 @@ handleChange(e){
                                                     <td>{student.address.street}</td>
                                                     <td>{student.address.number}</td>
                                                     <td>{student.address.zip_code}</td>
-                                                    <td>{student.ID_related}</td>
+                                                    <td>{student.grade}</td>
                                                     <td>
                                                         <button className="btn cyan darken-4" onClick={()=> this.editStudent(student._id)}>
                                                             <i className="tiny material-icons">edit</i>

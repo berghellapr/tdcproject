@@ -28,7 +28,7 @@ router.get('/:id', async(req,res)=>{
 
 router.post('/', async(req,res)=>{
     
-    const {name, last_name, DNI_student, file_number, phone_number, address, ID_related} = req.body
+    const {name, last_name, DNI_student, file_number, phone_number, address, grade} = req.body
     const {street, number, zip_code} = address
     const student = new Student({
         name, 
@@ -41,14 +41,14 @@ router.post('/', async(req,res)=>{
             number,
             zip_code
         },
-        ID_related})
+        grade})
     await student.save()
     res.json({status: 'The student was saved successfully'})
 })
 
 router.put('/:id', async(req, res)=>{
-    const {name, last_name, DNI_student, file_number, phone_number, address, ID_related} = req.body
-    const newStudent = {name, last_name, DNI_student, file_number, phone_number, address, ID_related}
+    const {name, last_name, DNI_student, file_number, phone_number, address, grade} = req.body
+    const newStudent = {name, last_name, DNI_student, file_number, phone_number, address, grade}
     await Student.findByIdAndUpdate(req.params.id, newStudent)
     res.json({status:'The student was updated successfully'})
 })
