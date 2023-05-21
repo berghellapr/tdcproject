@@ -1,4 +1,10 @@
 import React, {Component} from 'react'
+import Select from 'react-select' //ojo
+
+const gradeMappings = {
+    1: '5th A',
+    2: '5th B'
+  }
 
 class App extends Component {
 
@@ -17,7 +23,12 @@ class App extends Component {
             },
             grade:'',
             students: [],
-            _id: ''
+            _id: '',
+            selectedGrade: null, //inicialmente no hay nada, despues guarda lo seleccionado en el dropdown
+            gradeOptions: [
+                {value: '5th A', label: '5th A'},
+                {value: '5th B', label: '5th B'}
+            ]
         }
         this.handleChange = this.handleChange.bind(this)
         this.addStudent = this.addStudent.bind(this)
@@ -70,7 +81,7 @@ addStudent(e){
                 number: this.state.address.number,
                 zip_code: this.state.address.zip_code
                 },
-                grade: this.state.grade
+                grade: this.state.grade //uso el valor numerico
         }
         fetch('/api/students', {
             method: 'POST',
@@ -176,6 +187,17 @@ handleChange(e){
     }
 }
 
+handleGradeChange = (selectedOption) => {
+    if (selectedOption){
+        const gradeValue = selectedOption.value === '5th A'? 1: 2 //asigno un nro segun la opc
+        this.setState({selectedGrade: selectedOption, grade:gradeValue})
+    } else {
+        this.setState({selectedGrade: null, grade:''})
+    }
+  }  
+
+
+
     render(){
         return(
             <div>
@@ -265,9 +287,13 @@ handleChange(e){
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                            <input name="grade" onChange={this.handleChange}
-                                            type="text" placeholder="Grade" 
-                                            value={this.state.grade}/>
+                                                <Select 
+                                                    name="grade"
+                                                    options={this.state.gradeOptions}
+                                                    value={this.state.selectedGrade}
+                                                    onChange={this.handleGradeChange}
+                                                    placeholder="Select Grade"
+                                                />
                                             </div>
                                         </div>
                                         <button type="submit" className="btn cyan darken-4">
@@ -304,7 +330,7 @@ handleChange(e){
                                         <td>{student.address.street}</td>
                                         <td>{student.address.number}</td>
                                         <td>{student.address.zip_code}</td>
-                                        <td>{student.grade}</td>
+                                        <td>{gradeMappings[student.grade]}</td>
                                         <td>
                                         <button
                                             className="btn cyan darken-4"
